@@ -37,8 +37,9 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
             MostrarMensagem("Paciente inserido com sucesso", ConsoleColor.Green);
         }        
 
-        public void VisualizarPaciente()
+        public void VisualizarPaciente(bool mostrarCabecalho)
         {
+            if (mostrarCabecalho)
             MostrarCabecalho("Cadastro de Pacientes", "Visualizando pacientes ja cadastrados");
 
             ArrayList pacientes = repositorioPaciente.SelecionarTodos();
@@ -59,7 +60,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
         {
             MostrarCabecalho("Cadastro de Pacientes", "Editando um paciente já cadastrado...");
 
-            VisualizarPaciente();
+            VisualizarPaciente(false);
 
             Console.WriteLine();
 
@@ -77,7 +78,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
         {
             MostrarCabecalho("Cadastro de Pacientes", "Excluindo um paciente já cadastrado...");
 
-            VisualizarPaciente();
+            VisualizarPaciente(false);
 
             Console.WriteLine();
 

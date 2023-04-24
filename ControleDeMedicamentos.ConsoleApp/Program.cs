@@ -43,7 +43,7 @@ namespace ControleDeMedicamentos.ConsoleApp
 
                     else if (opcaoPaciente == "2")
                     {
-                        telaPaciente.VisualizarPaciente();
+                        telaPaciente.VisualizarPaciente(true);
                     }
 
                     else if (opcaoPaciente == "3")

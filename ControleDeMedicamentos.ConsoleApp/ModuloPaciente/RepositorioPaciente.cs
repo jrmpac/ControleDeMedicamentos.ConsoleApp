@@ -14,6 +14,11 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
 
         private int contadorPacientes = 0;
 
+        public ArrayList SelecionarTodos()
+        {
+            return listaPaciente;
+        }
+
         public void Inserir(Paciente paciente)
         {     
             contadorPacientes++;
@@ -25,20 +30,23 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
 
         public void Editar(int id, Paciente pacienteAtualizado)
         {
-            foreach (Paciente p in listaPaciente)
-            {
-                if (p.id == id)
-                {
-                    p.nome = pacienteAtualizado.nome;
-                    p.cpf = pacienteAtualizado.cpf;
-                    p.cartaoSus = pacienteAtualizado.cartaoSus;
-                    p.telefone = pacienteAtualizado.telefone;
-                    break;
-                }
-            }
+            Paciente pacienteSelecionado = SelecionarPorId(id);
+
+            pacienteSelecionado.nome = pacienteAtualizado.nome;
+            pacienteSelecionado.cpf = pacienteAtualizado.cpf;
+            pacienteSelecionado.cartaoSus = pacienteAtualizado.cartaoSus;
+            pacienteSelecionado.telefone = pacienteAtualizado.telefone;
+               
         }       
 
         public void Excluir(int id)
+        {
+            Paciente pacienteSelecionado = SelecionarPorId(id);
+
+            listaPaciente.Remove(pacienteSelecionado);
+        }
+
+        private Paciente SelecionarPorId(int id)
         {
             Paciente pacienteSelecionado = null;
 
@@ -51,12 +59,9 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
                 }
             }
 
-            listaPaciente.Remove(pacienteSelecionado);
+            return pacienteSelecionado;
         }
 
-        public ArrayList SelecionarTodos()
-        {
-            return listaPaciente;
-        }
+        
     }
 }
