@@ -24,7 +24,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
         }
 
         internal ArrayList SelecionarTodos()
-    {
+         {
             return listaPaciente;
         }
     }

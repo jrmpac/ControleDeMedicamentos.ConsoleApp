@@ -9,6 +9,9 @@ namespace ControleDeMedicamentos.ConsoleApp
     {
         static void Main(string[] args)
         {
+            // Features a serem adicionadas:
+            // fazer com que o sistema detecte qual medicamento está com quantidade baixa e realizar o pedido automaticamente;
+
             TelaPaciente telaPaciente = new TelaPaciente();
 
             TelaFuncionario telaFuncionario = new TelaFuncionario();
