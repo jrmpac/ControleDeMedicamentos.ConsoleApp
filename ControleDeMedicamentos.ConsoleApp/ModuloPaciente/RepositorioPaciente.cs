@@ -23,8 +23,39 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
             listaPaciente.Add(paciente);
         }
 
-        internal ArrayList SelecionarTodos()
-         {
+        public void Editar(int id, Paciente pacienteAtualizado)
+        {
+            foreach (Paciente p in listaPaciente)
+            {
+                if (p.id == id)
+                {
+                    p.nome = pacienteAtualizado.nome;
+                    p.cpf = pacienteAtualizado.cpf;
+                    p.cartaoSus = pacienteAtualizado.cartaoSus;
+                    p.telefone = pacienteAtualizado.telefone;
+                    break;
+                }
+            }
+        }       
+
+        public void Excluir(int id)
+        {
+            Paciente pacienteSelecionado = null;
+
+            foreach (Paciente p in listaPaciente)
+            {
+                if (p.id == id)
+                {
+                    pacienteSelecionado = p;
+                    break;
+                }
+            }
+
+            listaPaciente.Remove(pacienteSelecionado);
+        }
+
+        public ArrayList SelecionarTodos()
+        {
             return listaPaciente;
         }
     }

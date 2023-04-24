@@ -34,16 +34,68 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
 
             repositorioPaciente.Inserir(paciente);
 
-            ApresentarMensagem();
-        }
+            MostrarMensagem("Paciente inserido com sucesso", ConsoleColor.Green);
+        }        
 
-        private void ApresentarMensagem()
+        public void VisualizarPaciente()
         {
+            MostrarCabecalho("Cadastro de Pacientes", "Visualizando pacientes ja cadastrados");
+
+            ArrayList pacientes = repositorioPaciente.SelecionarTodos();
+
+            if (pacientes.Count == 0)
+            {
+                MostrarMensagem("Nenhum paciente cadastrado", ConsoleColor.DarkYellow);
+                return;
+            }
+
+            MostrarTabela(pacientes);
+
             Console.ReadLine();
 
-            Console.ForegroundColor = ConsoleColor.Green;
+        }               
 
-            Console.WriteLine("Paciente cadastrado com sucesso!");
+        public void EditarPaciente()
+        {
+            MostrarCabecalho("Cadastro de Pacientes", "Editando um paciente já cadastrado...");
+
+            VisualizarPaciente();
+
+            Console.WriteLine();
+
+            Console.Write("Digite o id do paciente: ");
+            int id = Convert.ToInt32(Console.ReadLine());
+
+            Paciente pacienteAtualizado = ObterPaciente();
+
+            repositorioPaciente.Editar(id, pacienteAtualizado);
+
+            MostrarMensagem("Paciente editado com sucesso!", ConsoleColor.Green);
+        }
+
+        public void ExcluirPaciente()
+        {
+            MostrarCabecalho("Cadastro de Pacientes", "Excluindo um paciente já cadastrado...");
+
+            VisualizarPaciente();
+
+            Console.WriteLine();
+
+            Console.Write("Digite o id do paciente: ");
+            int id = Convert.ToInt32(Console.ReadLine());
+
+            Paciente pacienteAtualizado = ObterPaciente();
+
+            repositorioPaciente.Excluir(id);
+
+            MostrarMensagem("Paciente excluido com sucesso!", ConsoleColor.DarkRed);
+        }
+
+        private void MostrarMensagem(string mensagem, ConsoleColor cor)
+        {
+            Console.ForegroundColor = cor;
+
+            Console.WriteLine(mensagem);
 
             Console.ResetColor();
 
@@ -57,6 +109,18 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
             Console.WriteLine(titulo + "\n");
 
             Console.WriteLine(subtitulo + "\n");
+        }
+        
+        private void MostrarTabela(ArrayList pacientes)
+        {
+            Console.WriteLine("{0,-10} | {1, -10} | {2, -10}", "Id", "Nome", "Telefone");
+
+            Console.WriteLine("--------------------------------------------------------------------");
+
+            foreach (Paciente paciente in pacientes)
+            {
+                Console.WriteLine("{0,-10} | {1, -10} | {2, -10}", paciente.id, paciente.nome, paciente.telefone);
+            }
         }
 
         private Paciente ObterPaciente()
@@ -76,48 +140,6 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
             Paciente paciente = new Paciente(nome, cpf, cartaoSus, telefone);
 
             return paciente;
-        }
-
-        public void VisualizarPaciente()
-        {
-            MostrarCabecalho("Cadastro de Pacientes", "Visualizando pacientes ja cadastrados");
-
-            ArrayList pacientes = repositorioPaciente.SelecionarTodos();
-
-            if (pacientes.Count == 0)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-
-                Console.WriteLine("Nenhuma caixa cadastrada");
-
-                Console.ResetColor();
-
-                Console.ReadLine();
-
-                return;
-            }
-
-            Console.WriteLine("{0,-10} | {1, -10} | {2, -10}", "Id", "Nome", "Telefone");
-
-            Console.WriteLine("--------------------------------------------------------------------"    );
-
-            foreach (Paciente paciente in pacientes)
-            {
-                Console.WriteLine("{0,-10} | {1, -10} | {2, -10}", paciente.id, paciente.nome, paciente.telefone);
-            }
-
-            Console.ReadLine();
-
-        }
-
-        public void EditarPaciente()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ExcluirPaciente()
-        {
-            throw new NotImplementedException();
         }
     }
 }
