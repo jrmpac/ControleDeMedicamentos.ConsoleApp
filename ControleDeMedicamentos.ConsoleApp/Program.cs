@@ -31,8 +31,8 @@ namespace ControleDeMedicamentos.ConsoleApp
                 if (opcao == "1")
                 {
                     
-                    string opcaoPaciente = telaPaciente.ApresentarMenu();
-
+                    string opcaoPaciente = telaPaciente.ApresentarMenu();      
+                    
                     if (opcaoPaciente == "1")
                     {
                         telaPaciente.InserirPaciente();
@@ -107,7 +107,7 @@ namespace ControleDeMedicamentos.ConsoleApp
                 }
 
                 else if (opcao == "4")
-                {
+                {                    
                     
                     string opcaoFornecedor = telaFornecedor.ApresentarMenu();
 
@@ -130,8 +130,8 @@ namespace ControleDeMedicamentos.ConsoleApp
                     {
                         telaFornecedor.ExcluirFornecedor();
                     }
-                }
             }
         }
     }
+}
 }
